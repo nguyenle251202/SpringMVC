@@ -31,14 +31,14 @@ public class ProductCtrl {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Product> addproduct(@RequestBody Product product){
-        productRepo.addProduct(product);
+    public ResponseEntity<Product> addproduct(@RequestBody Product product) {
+        productRepo.save(product);
         return null;
     }
 
     @PostMapping("/edit")
     public ResponseEntity<Product> editProduct(@RequestBody Product product){
-        productRepo.updateProduct(product);
+        productRepo.save(product);
         return null;
     }
 
