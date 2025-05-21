@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private ProductDTO productDTO;
     private ProductRepo productRepo;
 
     public ProductService(ProductRepo productRepo) {
@@ -26,6 +25,18 @@ public class ProductService {
 
     public Product getProductById(int id) {
         return productRepo.findById(id);
+    }
+
+    public Product getDelete(int id) {
+        productRepo.findById(id);
+        if (productRepo.existsById(id)) {
+            productRepo.deleteById(id);
+            System.out.println("Xoa xog");
+        }
+        else {
+            System.out.println("Co dell dau ma doi xoa");
+        }
+        return null;
     }
 //
 //    public void batchAdd(ProductDTO productDTO) {
@@ -42,7 +53,7 @@ public class ProductService {
 //            System.out.println("<UNK>");
 //        }
 //    }
-//
+
 //    public void batchUpdate(ProductDTO productDTO) {
 //        Product product = productRepo.findById(productDTO.getPid());
 //        if (product != null) {
@@ -54,16 +65,6 @@ public class ProductService {
 //        }
 //        else {
 //            System.out.println("<UNK>");
-//        }
-//    }
-//
-//    public void batchDelete(ProductDTO productDTO) {
-//        Product product = productRepo.findById(productDTO.getPid());
-//        if (product != null) {
-//            productRepo.delete(product);
-//        }
-//        else {
-//            System.out.println("Co dell dau ma doi xoa");
 //        }
 //    }
 }

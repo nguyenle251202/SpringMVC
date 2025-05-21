@@ -34,13 +34,12 @@ public class ProductCtrl {
     public Product getProduct(@PathVariable int id){
         return productService.getProductById(id);
     }
-//    @PostMapping("/delete/{id}")
-//    public Product deleteProduct(@PathVariable int id, HttpServletResponse response){
-//        productRepo.deleteById(id);
-//        response.setStatus(200);
-//        return null;
-//    }
-//
+    @PostMapping("/delete/{id}")
+    public Product deleteProduct(@PathVariable int id){
+        productService.getDelete(id);
+        return null;
+    }
+
 //    @PostMapping("/add")
 //    public ProductDTO addProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response) {
 //        productService.batchAdd(productDTO);
