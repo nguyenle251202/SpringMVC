@@ -31,20 +31,20 @@ public class ProductCtrl {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Product> addproduct(@RequestBody Product product){
-        productRepo.addProduct(product);
-        return null;
+    public Product addProduct(@RequestBody Product product) {
+        productRepo.save(product);
+        return product;
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<Product> editProduct(@RequestBody Product product){
-        productRepo.updateProduct(product);
-        return null;
+    public Product updateProduct(@RequestBody Product product){
+        productRepo.save(product);
+        return product;
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable int id, HttpServletResponse response){
+    public Product deleteProduct(@PathVariable int id, HttpServletResponse response){
         productRepo.deleteById(id);
-        return "Deleted product with id: " + id;
+        return null;
     }
 }

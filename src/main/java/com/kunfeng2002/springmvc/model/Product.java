@@ -12,7 +12,7 @@ import lombok.*;
 @ToString
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduct")
     private int Pid;
 
