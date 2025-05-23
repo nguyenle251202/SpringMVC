@@ -1,5 +1,6 @@
 package com.kunfeng2002.springmvc.model;
 
+import com.kunfeng2002.springmvc.annotation.ControllerAdvice;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class Product {
     @Column(name = "idProduct")
     private int Pid;
 
+    @ControllerAdvice(message = "CMM, name dell dc phep co ky tu dac biet")
     @Column(name = "nameProduct")
     private String Pname;
 

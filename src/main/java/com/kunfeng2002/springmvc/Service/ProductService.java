@@ -3,6 +3,9 @@ package com.kunfeng2002.springmvc.Service;
 import com.kunfeng2002.springmvc.DTO.ProductDTO;
 import com.kunfeng2002.springmvc.Repo.ProductRepo;
 import com.kunfeng2002.springmvc.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,16 +13,15 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    private ProductDTO productDTO;
+    @Autowired
     private ProductRepo productRepo;
+//
+//    public ProductService(ProductRepo productRepo) {
+//        this.productRepo = productRepo;
+//    }
 
-    public ProductService(ProductRepo productRepo) {
-        this.productRepo = productRepo;
-    }
-
-    public List<Product> getAllProducts() {
-        List<Product> products = productRepo.findAll();
-        return productRepo.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepo.findAll(pageable);
     }
 
     public Product getProductById(int id) {
@@ -63,4 +65,5 @@ public class ProductService {
         product.setPcategory(productDTO.getPcategory());
         productRepo.save(product);
     }
+
 }

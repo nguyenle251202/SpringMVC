@@ -24,9 +24,18 @@ public class ProductCtrl {
     private ProductService productService;
 
     @GetMapping("/getall")
-    public List<Product> getAll(){
-        List<Product> products = productService.getAllProducts();
-        return products;
+//    public List<Product> getAll(){
+//        List<Product> products = productService.getAllProducts();
+//        return products;
+    public ResponseEntity<Page<Product>> getAll(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size,
+            @RequestParam(value = "sort", defaultValue = "id, asc") String[] sort
+    ) {
+        Sort.Direction direction = Sort.Direction.fromString(sort[1]);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort[0]));
+        Page<Product> products = productService.getAllProducts(pageable);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/get/{id}")
@@ -42,14 +51,20 @@ public class ProductCtrl {
     @PostMapping("/add")
     public ProductDTO addProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response) {
         productService.getAdd(productDTO);
-        response.setStatus(200);
+        response.setStatus(201);
         return productDTO;
     }
 
     @PostMapping("/edit")
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response){
         productService.getUpdate(productDTO);
-        response.setStatus(200);
+        response.setStatus(201);
         return productDTO;
+    }
+
+    @GetMapping("/test")
+    public String test(HttpServletResponse response){
+        response.setStatus(500);
+        return "test";
     }
 }
