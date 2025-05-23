@@ -22,7 +22,6 @@ public class ProductCtrl {
 
     @Autowired
     private ProductService productService;
-//    private final ProductRepo productRepo;
 
     @GetMapping("/getall")
     public List<Product> getAll(){
@@ -40,19 +39,17 @@ public class ProductCtrl {
         return null;
     }
 
-//    @PostMapping("/add")
-//    public ProductDTO addProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response) {
-//        productService.batchAdd(productDTO);
-//        response.setStatus(200);
-//        System.out.println("Added product(s) successfully");
-//        return productDTO;
-//    }
-//
-//    @PostMapping("/edit")
-//    public ProductDTO updateProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response){
-//        productService.batchUpdate(productDTO);
-//        response.setStatus(200);
-//        System.out.println("Added product(s) successfully");
-//        return productDTO;
-//    }
+    @PostMapping("/add")
+    public ProductDTO addProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response) {
+        productService.getAdd(productDTO);
+        response.setStatus(200);
+        return productDTO;
+    }
+
+    @PostMapping("/edit")
+    public ProductDTO updateProduct(@RequestBody ProductDTO productDTO, HttpServletResponse response){
+        productService.getUpdate(productDTO);
+        response.setStatus(200);
+        return productDTO;
+    }
 }

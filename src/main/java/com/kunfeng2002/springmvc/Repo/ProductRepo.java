@@ -28,8 +28,9 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     @Query(nativeQuery = true, value = "insert into product " +
             "(id_product, name_product, description_product, price_product, category_product) " +
             "values (?1, ?2, ?3, ?4, ?5) ")
-    ProductDTO addProduct(ProductDTO productDTO);
+    Product addProduct(Product product);
 
+    @Transactional
     @Modifying
     @Query(nativeQuery = true, value = "update product " +
             "set name_product =?2, description_product =?3, price_product =?4, category_product=?5 where id_product=?1")

@@ -3,8 +3,6 @@ package com.kunfeng2002.springmvc.Service;
 import com.kunfeng2002.springmvc.DTO.ProductDTO;
 import com.kunfeng2002.springmvc.Repo.ProductRepo;
 import com.kunfeng2002.springmvc.model.Product;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +10,7 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    private ProductDTO productDTO;
     private ProductRepo productRepo;
 
     public ProductService(ProductRepo productRepo) {
@@ -38,33 +37,30 @@ public class ProductService {
         }
         return null;
     }
-//
-//    public void batchAdd(ProductDTO productDTO) {
-//        Product product = productRepo.findById(productDTO.getPid());
-//        if (product != null) {
-//            product.setPid(productDTO.getPid());
-//            product.setPname(productDTO.getPname());
-//            product.setPdescription(productDTO.getPdescription());
-//            product.setPprice(productDTO.getPprice());
-//            product.setPcategory(productDTO.getPcategory());
-//            productRepo.save(product);
-//        }
-//        else {
-//            System.out.println("<UNK>");
-//        }
-//    }
 
-//    public void batchUpdate(ProductDTO productDTO) {
-//        Product product = productRepo.findById(productDTO.getPid());
-//        if (product != null) {
-//            product.setPname(productDTO.getPname());
-//            product.setPdescription(productDTO.getPdescription());
-//            product.setPprice(productDTO.getPprice());
-//            product.setPcategory(productDTO.getPcategory());
-//            productRepo.save(product);
-//        }
-//        else {
-//            System.out.println("<UNK>");
-//        }
-//    }
+    public void getAdd(ProductDTO productDTO) {
+        productRepo.findById(productDTO.getPid());
+        if(productRepo.existsById(productDTO.getPid())) {
+            Product product1 = new Product();
+            product1.setPid(productDTO.getPid());
+            product1.setPname(productDTO.getPname());
+            product1.setPdescription(productDTO.getPdescription());
+            product1.setPprice(productDTO.getPprice());
+            product1.setPcategory(productDTO.getPcategory());
+            productRepo.save(product1);
+            System.out.println("Xoa xog");
+        }
+        else {
+            System.out.println("ID nay co r, chon ID khac di");
+        }
+    }
+
+    public void getUpdate(ProductDTO productDTO) {
+        Product product = productRepo.findById(productDTO.getPid());
+        product.setPname(productDTO.getPname());
+        product.setPdescription(productDTO.getPdescription());
+        product.setPprice(productDTO.getPprice());
+        product.setPcategory(productDTO.getPcategory());
+        productRepo.save(product);
+    }
 }
